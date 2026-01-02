@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS 운영 효율화 전략 대시보드 | 더큐알</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+        body { font-family: 'Noto Sans KR', sans-serif; background-color: #f3f4f6; }
+        .card { background-color: white; border-radius: 0.75rem; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); padding: 1.5rem; }
+        .print-btn { @media print { display: none; } }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="bg-blue-600 text-white p-2 rounded-lg font-bold text-xl">The QR</div>
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-900">CS 운영 효율화 전략 보고서</h1>
+                    <p class="text-sm text-gray-500">작성일: 2026.01.02 | 수정: SMS 결제요청 시스템 반영</p>
+                </div>
+            </div>
+            <button onclick="window.print()" class="print-btn bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition">
+                <i class="fas fa-print"></i> 보고서 인쇄/PDF 저장
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Key Metrics (Executive Summary) -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="card border-l-4 border-red-500">
+                <div class="flex items-center justify-between mb-2">
+                    <h3 class="text-gray-500 text-sm font-medium">핵심 문제점</h3>
+                    <i class="fas fa-exclamation-circle text-red-500"></i>
+                </div>
+                <p class="text-lg font-bold">주문 정보 수기 입력</p>
+                <p class="text-xs text-gray-400 mt-1">상담원이 주소/금액 받아적느라 시간 소요</p>
+            </div>
+            <div class="card border-l-4 border-blue-500">
+                <div class="flex items-center justify-between mb-2">
+                    <h3 class="text-gray-500 text-sm font-medium">해결 솔루션</h3>
+                    <i class="fas fa-file-invoice-dollar text-blue-500"></i>
+                </div>
+                <p class="text-lg font-bold">SMS 결제요청 서비스</p>
+                <p class="text-xs text-gray-400 mt-1">상담 후 '결제서 링크' 발송</p>
+            </div>
+            <div class="card border-l-4 border-green-500">
+                <div class="flex items-center justify-between mb-2">
+                    <h3 class="text-gray-500 text-sm font-medium">업무 효율화</h3>
+                    <i class="fas fa-user-clock text-green-500"></i>
+                </div>
+                <p class="text-2xl font-bold text-green-600">3배↑</p>
+                <p class="text-xs text-gray-400 mt-1">동일 시간 내 주문 처리량</p>
+            </div>
+            <div class="card border-l-4 border-indigo-500">
+                <div class="flex items-center justify-between mb-2">
+                    <h3 class="text-gray-500 text-sm font-medium">오배송 감소</h3>
+                    <i class="fas fa-map-marked-alt text-indigo-500"></i>
+                </div>
+                <p class="text-2xl font-bold text-indigo-600">0% 도전</p>
+                <p class="text-xs text-gray-400 mt-1">고객이 직접 주소 입력</p>
+            </div>
+        </div>
+
+        <!-- Section 1: Implementation Strategy (UPDATED) -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            <!-- Left: Implementation Architecture -->
+            <div class="card lg:col-span-2">
+                <h3 class="font-bold text-gray-800 mb-4 border-b pb-2">상담형 주문 최적화 프로세스 (Human + Tech)</h3>
+                
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4 mt-6">
+                    <!-- Step 1 -->
+                    <div class="flex-1 text-center group">
+                        <div class="w-16 h-16 mx-auto bg-gray-100 rounded-full flex items-center justify-center mb-3">
+                            <i class="fas fa-headset text-2xl text-gray-600"></i>
+                        </div>
+                        <h4 class="font-bold text-sm">1. 전화 상담 (기존 유지)</h4>
+                        <p class="text-xs text-gray-500 mt-1">"사장님, 오늘 굴 싱싱해요?"<br>"네, 2kg에 5만원입니다."</p>
+                    </div>
+                    <!-- Arrow -->
+                    <div class="hidden md:block text-gray-300"><i class="fas fa-chevron-right text-xl"></i></div>
+                    
+                    <!-- Step 2 -->
+                    <div class="flex-1 text-center group">
+                        <div class="w-16 h-16 mx-auto bg-blue-50 border-2 border-blue-200 rounded-full flex items-center justify-center mb-3 shadow-sm">
+                            <i class="fas fa-paper-plane text-2xl text-blue-600"></i>
+                        </div>
+                        <h4 class="font-bold text-sm text-blue-700">2. 결제요청서 발송 (클릭)</h4>
+                        <div class="mt-2 bg-blue-100 text-blue-800 text-xs py-2 px-3 rounded text-left mx-auto w-4/5">
+                            상담원이 PC에서 금액(5만원) 입력 후 <strong>[문자발송]</strong> 버튼 클릭
+                        </div>
+                    </div>
+                    <!-- Arrow -->
+                    <div class="hidden md:block text-gray-300"><i class="fas fa-chevron-right text-xl"></i></div>
+
+                    <!-- Step 3 -->
+                    <div class="flex-1 text-center group">
+                        <div class="w-16 h-16 mx-auto bg-green-50 border-2 border-green-200 rounded-full flex items-center justify-center mb-3">
+                            <i class="fas fa-hand-holding-usd text-2xl text-green-600"></i>
+                        </div>
+                        <h4 class="font-bold text-sm text-green-700">3. 고객 결제 & 주소입력</h4>
+                        <p class="text-xs text-gray-500 mt-1">문자 링크 클릭 → 금액확인<br>→ 계좌이체/카드결제 → <strong>주소 직접 입력</strong></p>
+                    </div>
+                </div>
+
+                <div class="mt-6 bg-yellow-50 p-4 rounded-lg border border-yellow-200 flex gap-4 items-start">
+                    <i class="fas fa-lightbulb text-yellow-600 mt-1"></i>
+                    <div>
+                        <h5 class="font-bold text-sm text-yellow-800">이 방식의 결정적 장점</h5>
+                        <p class="text-xs text-yellow-700 mt-1">
+                            상담원이 계좌번호를 불러주거나 문자로 칠 필요가 없습니다. <br>
+                            가장 중요한 <strong>'배송 주소'를 고객이 직접 입력</strong>하게 하여 오배송 사고를 원천 차단합니다. <br>
+                            (어르신들도 '금액 확인' 화면에서 주소 넣는 방식은 홈쇼핑 ARS보다 훨씬 쉬워하십니다.)
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Recommended Platforms -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div class="card">
+                <h3 class="font-bold text-gray-800 mb-4 border-b pb-2">추천 플랫폼 (SMS 결제요청)</h3>
+                <ul class="space-y-4">
+                    <li class="flex items-start">
+                        <div class="flex-shrink-0 w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center mr-3">
+                            <span class="font-bold text-indigo-700">A</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-sm">페이앱 (PayApp) / 블로그페이</h4>
+                            <p class="text-xs text-gray-600 mt-1">국내 1위 수기결제/링크결제 솔루션.</p>
+                            <ul class="text-xs text-gray-500 list-disc list-inside mt-1">
+                                <li>상담원 PC 관리자 페이지 제공</li>
+                                <li>카드결제, 휴대폰결제, 무통장입금 모두 지원</li>
+                                <li><strong>주소 요청 기능 기본 탑재</strong></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <div class="flex-shrink-0 w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center mr-3">
+                            <span class="font-bold text-gray-700">B</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-sm">PG사 수기결제 (나이스페이, 토스 등)</h4>
+                            <p class="text-xs text-gray-600 mt-1">기존 PG사를 쓰고 계시다면 'SMS 결제' 부가서비스 신청.</p>
+                            <p class="text-xs text-gray-500 mt-1">*단, '주소 입력 기능'이 약할 수 있어 확인 필요.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="card bg-gray-50">
+                <h3 class="font-bold text-gray-800 mb-4 border-b pb-2">실행 로드맵 (Action Plan)</h3>
+                <div class="relative pl-4 border-l-2 border-gray-300 space-y-6">
+                    <div class="relative">
+                        <span class="absolute -left-[21px] top-0 w-4 h-4 rounded-full bg-blue-500 border-2 border-white"></span>
+                        <h4 class="font-bold text-sm text-gray-800">Step 1. 솔루션 가입 (즉시)</h4>
+                        <p class="text-xs text-gray-600 mt-1">'페이앱' 등 SMS 결제 서비스 가입 (가입비 약 10~20만원, 연회비 없음)</p>
+                    </div>
+                    <div class="relative">
+                        <span class="absolute -left-[21px] top-0 w-4 h-4 rounded-full bg-gray-300 border-2 border-white"></span>
+                        <h4 class="font-bold text-sm text-gray-800">Step 2. 상담원 교육</h4>
+                        <p class="text-xs text-gray-600 mt-1">"고객님, 금액과 계좌번호가 적힌 결제창을 문자로 보내드릴테니 주소 입력해주세요~" 멘트 교육.</p>
+                    </div>
+                    <div class="relative">
+                        <span class="absolute -left-[21px] top-0 w-4 h-4 rounded-full bg-gray-300 border-2 border-white"></span>
+                        <h4 class="font-bold text-sm text-gray-800">Step 3. 보이는 ARS 연동 (선택)</h4>
+                        <p class="text-xs text-gray-600 mt-1">
+                            배송조회/단순문의는 여전히 '보이는 ARS'로 방어하고, <br>
+                            주문상담만 상담원에게 연결되도록 설정.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chart Section -->
+        <div class="card">
+            <h3 class="font-bold text-gray-800 mb-4">CS 처리 시간 단축 예상효과</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="relative h-48">
+                     <canvas id="timeChart"></canvas>
+                </div>
+                <div>
+                    <h4 class="font-bold text-sm mb-2 text-red-500">Before (기존)</h4>
+                    <p class="text-xs text-gray-600 mb-4">상담(2분) + 계좌안내/받아적기(3분) = <strong>총 5분 소요</strong></p>
+                    
+                    <h4 class="font-bold text-sm mb-2 text-blue-600">After (개선)</h4>
+                    <p class="text-xs text-gray-600">상담(2분) + 링크전송(10초) = <strong>총 2분 10초 소요</strong></p>
+                    
+                    <div class="mt-4 bg-blue-50 text-blue-800 text-xs font-bold p-2 rounded text-center">
+                        생산성 2배 이상 향상 예상
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Chart Script -->
+    <script>
+        const ctx = document.getElementById('timeChart').getContext('2d');
+        const timeChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['기존 방식', '솔루션 도입'],
+                datasets: [
+                    {
+                        label: '상담(상품문의)',
+                        data: [120, 120], // 초 단위
+                        backgroundColor: '#93c5fd'
+                    },
+                    {
+                        label: '주문처리(주소/입금)',
+                        data: [180, 10], // 초 단위
+                        backgroundColor: '#ef4444'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: { stacked: true },
+                    y: { 
+                        stacked: true,
+                        title: { display: true, text: '소요 시간 (초)' }
+                    }
+                },
+                plugins: {
+                    legend: { position: 'bottom' }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
