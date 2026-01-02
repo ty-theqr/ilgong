@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS 운영 효율화 전략 대시보드 | 더큐알</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+        body { font-family: 'Noto Sans KR', sans-serif; background-color: #f3f4f6; }
+        .card { background-color: white; border-radius: 0.75rem; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); padding: 1.5rem; }
+        .print-btn { @media print { display: none; } }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="bg-blue-600 text-white p-2 rounded-lg font-bold text-xl">The QR</div>
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-900">CS 운영 효율화 전략 보고서</h1>
+                    <p class="text-sm text-gray-500">작성일: 2026.01.02 | 수정: 기술 구현 로드맵 추가</p>
+                </div>
+            </div>
+            <button onclick="window.print()" class="print-btn bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition">
+                <i class="fas fa-print"></i> 보고서 인쇄/PDF 저장
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Key Metrics (Executive Summary) -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="card border-l-4 border-red-500">
+                <div class="flex items-center justify-between mb-2">
+                    <h3 class="text-gray-500 text-sm font-medium">현재 주요 문제</h3>
+                    <i class="fas fa-exclamation-circle text-red-500"></i>
+                </div>
+                <p class="text-lg font-bold">계좌문의 전화 폭주</p>
+                <p class="text-xs text-gray-400 mt-1">상담 연결 지연 및 주문 이탈 발생</p>
+            </div>
+            <div class="card border-l-4 border-blue-500">
+                <div class="flex items-center justify-between mb-2">
+                    <h3 class="text-gray-500 text-sm font-medium">도입 솔루션</h3>
+                    <i class="fas fa-mobile-alt text-blue-500"></i>
+                </div>
+                <p class="text-lg font-bold">보이는 ARS + 문자</p>
+                <p class="text-xs text-gray-400 mt-1">계좌번호/주문양식 자동 발송</p>
+            </div>
+            <div class="card border-l-4 border-green-500">
+                <div class="flex items-center justify-between mb-2">
+                    <h3 class="text-gray-500 text-sm font-medium">목표 감소율</h3>
+                    <i class="fas fa-chart-line text-green-500"></i>
+                </div>
+                <p class="text-2xl font-bold text-green-600">-50%</p>
+                <p class="text-xs text-gray-400 mt-1">단순 상담 통화량 절감 목표</p>
+            </div>
+            <div class="card border-l-4 border-indigo-500">
+                <div class="flex items-center justify-between mb-2">
+                    <h3 class="text-gray-500 text-sm font-medium">주문 처리 속도</h3>
+                    <i class="fas fa-bolt text-indigo-500"></i>
+                </div>
+                <p class="text-2xl font-bold text-indigo-600">3분 → 10초</p>
+                <p class="text-xs text-gray-400 mt-1">계좌번호 안내 소요 시간</p>
+            </div>
+        </div>
+
+        <!-- Section 1: Implementation Strategy (UPDATED) -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            <!-- Left: Implementation Architecture -->
+            <div class="card">
+                <h3 class="font-bold text-gray-800 mb-4 border-b pb-2">기술적 구현 아키텍처 (Hybrid 방식)</h3>
+                <div class="space-y-6">
+                    <div class="flex items-start gap-4 p-3 bg-blue-50 rounded-lg border border-blue-100">
+                        <div class="mt-1"><i class="fas fa-sms text-2xl text-blue-600"></i></div>
+                        <div>
+                            <h4 class="font-bold text-blue-800">1. 통신사 플랫폼 역할 (Trigger)</h4>
+                            <p class="text-sm text-gray-600 mt-1">
+                                복잡한 기능 없이 <strong>'단순 문자 발송'</strong> 기능만 사용합니다.
+                            </p>
+                            <ul class="text-xs text-gray-500 list-disc list-inside mt-2">
+                                <li>1번 선택 시: "계좌번호 텍스트" 문자 발송</li>
+                                <li>2번 선택 시: "배송/반품조회 <strong>URL 링크</strong>" 문자 발송</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-center text-gray-400">
+                        <i class="fas fa-arrow-down"></i>
+                    </div>
+
+                    <div class="flex items-start gap-4 p-3 bg-indigo-50 rounded-lg border border-indigo-100">
+                        <div class="mt-1"><i class="fas fa-laptop-code text-2xl text-indigo-600"></i></div>
+                        <div>
+                            <h4 class="font-bold text-indigo-800">2. 더큐알 자체 제작 (Landing Page)</h4>
+                            <p class="text-sm text-gray-600 mt-1">
+                                고객이 링크 클릭 시 보여질 <strong>'모바일 웹페이지'</strong>를 직접 제작합니다. (홈페이지팀 2명 활용)
+                            </p>
+                            <ul class="text-xs text-gray-500 list-disc list-inside mt-2">
+                                <li><strong>배송조회:</strong> 스마트스토어/택배사 조회 페이지 링크 연결</li>
+                                <li><strong>파손접수:</strong> HTML Form 제작 (사진 업로드 → 내부 서버 저장)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: UI Strategy Details -->
+            <div class="card">
+                <h3 class="font-bold text-gray-800 mb-4 border-b pb-2">기능별 상세 구현 방안</h3>
+                <ul class="space-y-4">
+                    <li class="flex items-start">
+                        <div class="flex-shrink-0 w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold mr-3">1</div>
+                        <div>
+                            <h4 class="font-bold text-sm">계좌번호 안내 (Text Only)</h4>
+                            <p class="text-xs text-gray-500 mb-1">통신사 기본 기능 100% 활용</p>
+                            <div class="bg-gray-100 p-2 rounded text-xs text-gray-600">
+                                ARS 설정: "1번 누르면 지정된 문구(계좌번호) SMS 발송"
+                            </div>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <div class="flex-shrink-0 w-8 h-8 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center font-bold mr-3">2</div>
+                        <div>
+                            <h4 class="font-bold text-sm">배송 조회 (Link Redirect)</h4>
+                            <p class="text-xs text-gray-500 mb-1">API 연동 개발 비용 절감</p>
+                            <div class="bg-gray-100 p-2 rounded text-xs text-gray-600">
+                                ARS 설정: "2번 누르면 [배송조회 바로가기 URL] 발송"<br>
+                                URL 내용: 네이버페이 구매내역 or 택배사 조회 링크로 이동
+                            </div>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <div class="flex-shrink-0 w-8 h-8 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center font-bold mr-3">3</div>
+                        <div>
+                            <h4 class="font-bold text-sm">파손 접수 (Mobile Web Form)</h4>
+                            <p class="text-xs text-gray-500 mb-1">더큐알 웹팀 자체 제작 페이지</p>
+                            <div class="bg-gray-100 p-2 rounded text-xs text-gray-600">
+                                ARS 설정: "3번 누르면 [접수 페이지 URL] 발송"<br>
+                                페이지 기능: 이름/연락처 입력 + <strong>사진 첨부(input type="file")</strong>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Section 2: Action Plan & Timeline -->
+        <div class="card bg-gray-50 mb-8">
+            <h3 class="font-bold text-gray-800 mb-4 border-b pb-2">실행 타임라인 (내부 제작 포함)</h3>
+            <div class="flex flex-col md:flex-row gap-4 text-sm">
+                <div class="flex-1 bg-white p-4 rounded shadow-sm border border-gray-200">
+                    <span class="text-blue-600 font-bold mb-2 block">Step 1. 통신사 계약 (1주차)</span>
+                    <p class="text-gray-600 text-xs">"보이는 ARS" 또는 "콜백 문자 서비스" 가입. (월 3~5만원)</p>
+                    <p class="text-gray-500 text-xs mt-1">*KT/LG 상담 시 "버튼 누르면 문자 나가는 기능" 확인</p>
+                </div>
+                <div class="flex-1 bg-white p-4 rounded shadow-sm border border-gray-200">
+                    <span class="text-indigo-600 font-bold mb-2 block">Step 2. 웹페이지 제작 (1주차)</span>
+                    <p class="text-gray-600 text-xs">홈페이지팀: 모바일용 랜딩페이지 1장 제작.</p>
+                    <ul class="list-disc list-inside text-xs text-gray-500 mt-1">
+                        <li>섹션1: 배송조회 링크 모음</li>
+                        <li>섹션2: 파손 사진 업로드 폼</li>
+                    </ul>
+                </div>
+                <div class="flex-1 bg-white p-4 rounded shadow-sm border border-gray-200">
+                    <span class="text-green-600 font-bold mb-2 block">Step 3. 연결 및 오픈 (2주차)</span>
+                    <p class="text-gray-600 text-xs">통신사 ARS 설정 페이지에서 2번, 3번 버튼에 제작한 URL 입력.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chart Section (Visualizing Impact) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="card">
+                <h3 class="font-bold text-gray-800 mb-4">CS 유입 분석</h3>
+                <div class="relative h-48">
+                    <canvas id="csChart"></canvas>
+                </div>
+            </div>
+            <div class="card bg-blue-600 text-white flex flex-col justify-center items-center text-center">
+                <i class="fas fa-lightbulb text-4xl mb-4 text-yellow-300"></i>
+                <h3 class="text-xl font-bold mb-2">The QR만의 강점 활용</h3>
+                <p class="text-sm opacity-90 px-8">
+                    별도의 비싼 솔루션 업체 없이,<br>
+                    <strong>통신사의 저렴한 인프라</strong>와<br>
+                    <strong>내부 웹팀의 제작 능력</strong>을 결합하여<br>
+                    최소 비용으로 최적의 시스템 구축 가능.
+                </p>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Chart Script -->
+    <script>
+        const ctx = document.getElementById('csChart').getContext('2d');
+        const csChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['전화주문(계좌문의)', '배송확인(URL대체)', '파손/클레임(웹폼)', '기타'],
+                datasets: [{
+                    label: 'CS 유입 비율',
+                    data: [45, 20, 25, 10],
+                    backgroundColor: [
+                        '#2563eb', // Blue
+                        '#6366f1', // Indigo
+                        '#ef4444', // Red
+                        '#e5e7eb'  // Gray
+                    ],
+                    borderWidth: 0,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'right', labels: { boxWidth: 12, font: { size: 11 } } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
